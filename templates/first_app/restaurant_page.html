@@ -1,0 +1,246 @@
+{% load static %}
+{% load app_tags %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>CRM</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="{% static 'main.css' %}">
+	   <link rel="stylesheet" type="text/css" href="{% static 'first_app\fontawesome-free-5.11.2-web\css\all.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'first_app\bootstrap\css\bootstrap.css' %}" >
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <script src="{% static 'restauran.js' %}" async></script>
+
+
+<style>
+input{
+	margin: 5px;
+}
+img{
+	height: 30px;
+}
+	
+</style>
+
+	
+</head>
+<body>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark" >
+  <a class="navbar-brand" href="#"><img src="{% static 'first_app/images/nuno.png' %}"></a>
+ 
+        
+         <a class="nav-link" href="{% url 'logout' %}" style=" text-align: right;"><span style="color: white;">Logout <span class="sr-only">(current)</span></a>
+       
+  </nav>
+	
+	<div class="container-fluid">
+		<br>
+
+<div class="row">
+	<div class="col">
+		<div class="col-md">
+			<div class="card text-center text-white  mb-3" id="total-orders">
+			  	<div class="card-header">
+			  		<h5 class="card-title">Orders Pending</h5>
+			  	</div>
+			  	<div class="card-body">
+			    	<h3 class="card-title">{{count_pe}}</h3>
+			  	</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="col">
+		<div class="col-md">
+			<div class="card text-center text-white  mb-3" id="orders-delivered">
+			  	<div class="card-header">
+			  		<h5 class="card-title">Orders Preparing</h5>
+			  	</div>
+			  	<div class="card-body">
+			    	<h3 class="card-title">{{count_pr}}</h3>
+			  	</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="col">
+		<div class="col-md">
+			<div class="card text-center text-white  mb-3" id="orders-pending">
+			  	<div class="card-header">
+			  		<h5 class="card-title">Orders Delivering</h5>
+			  	</div>
+			  	<div class="card-body">
+			    	<h3 class="card-title">{{count_de}}</h3>
+			  	</div>
+			</div>
+		</div>
+	</div>
+	<div class="col">
+		<div class="col-md">
+			<div class="card text-center text-white  mb-3" id="orders-pending">
+			  	<div class="card-header">
+			  		<h5 class="card-title">Orders Delivered</h5>
+			  	</div>
+			  	<div class="card-body">
+			    	<h3 class="card-title">{{count_dd}}</h3>
+			  	</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<br>
+
+<div class="row">
+	
+
+	<div class="col-md">
+		<h5>TOP 10 ORDERS</h5>
+		<hr>
+		<div class="card card-body">
+			<!-- <div class="row">
+			<div class='col-lg-4'><a class="btn btn-primary btn-block  " href="">Add Item</a></div>
+			<div class='col-lg-4'><a class="btn btn-primary btn-block  " href="">Remove Item</a></div>
+			<div class='col-lg-4'><a class="btn btn-primary btn-block   " href="">Change Item</a></div>
+		</div> -->
+		<form method='GET'>
+    {{orderfilter.form}}
+    <button type="submit" name='order' class="btn btn-primary">Search</button>
+  </form>
+			<table style="margin-top: 30px" class="table table-sm">
+				<tr>
+					<th>Order Id</th>
+					<th>Booking Id</th>
+					<th>Room Id</th>
+					<th>Items</th>
+					<th>Status</th>
+				</tr>
+				{% for i in orders %}
+				{% if forloop.counter < 11 %}
+					<tr>
+					<td>{{i.Order_Id}}</td>
+					<td>{{i.Booking_Id}}</td>
+					<td>{{i.Room_Id}}</td>
+					<td>
+						<table>
+							{% for j in i|quantity %}
+							<tr>{{j.Order.Food_Item}}({{j.Quantity}}),</tr>
+
+							{% endfor %}
+						</table>
+					</td>				
+					<td>
+					<form method="POST" action="{% url 'change_status' i.Order_Id %}">	
+					{% csrf_token %}	
+						<select name='status' style="width:100px">
+
+  <option value="" selected disabled hidden>{{i.Status}}</option>
+  <option value="Pending">Pending</option>
+  <option value="Preparing">Preparing</option>
+  <option value="Delivering">Delivering</option>
+  <option value="Delivered">Delivered</option>
+</select>
+
+<button type="submit" class="btn btn-primary">
+	Change
+	
+</button>
+</form>
+</td>
+				</tr>
+				{% endif %}
+				{% endfor %}
+		
+			</table>
+		</div>
+	</div>
+
+</div>
+
+<div style="margin-top: 50px;" class="col-md">
+		<h5>Restaurant Food items</h5>
+		<hr>
+		<div class="card card-body">
+			
+			
+		<form method='GET'>
+    {{itemfilter.form}}
+    <button type="submit" name='item' class="btn btn-primary">Search</button>
+  </form>
+			<table style="margin-top: 30px" class="table table-sm">
+				
+				<tr>
+					<th>Food Item</th>
+					<th>Price</th>
+					<th>Type</th>
+					<th>Change</th>
+					<th>Remove</th>
+				</tr>
+				{% for i in items %}
+				{% if forloop.counter < 15 %}
+				
+					<tr>
+						<form id="my_form_{{forloop.counter}}" method="POST" action="{% url 'change' i.Food_Item %}">
+					{% csrf_token %}
+					<td>{{i.Food_Item}}</td>
+					<td>{{i.Price}}</td>
+					<td>{{i.Type}}</td>
+									
+					<td>
+			
+<a style="color: white" onclick="Change(this,'{{i.Food_Item}}','{{i.Price}}','{{i.Type}}')" name="change" class="c btn btn-primary">
+	Update Price
+</a>	
+
+
+	<span class='changes'>
+
+	</span>
+
+	
+
+</td>
+</form>
+<td>
+<form method="POST" id="form_is" action="{% url 'remove' i.Food_Item %}">
+				{% csrf_token %}
+			<button type="submit" name="remove" form="form_is"  class="btn btn-primary">Remove</button>
+	   </form>
+						
+					</td>
+
+				</tr>
+			
+			
+				{% endif %}
+				{% endfor %}
+		
+			</table>
+			<form id='form'  method="POST" action="{% url 'add' %}">
+				{% csrf_token %}
+				<div class='abc'>
+					
+				</div>
+			
+		</form>
+		
+		<button id="b" style="margin: 15px;" class="btn btn-primary btn-block  " href="">Add Item</button>
+		</div>
+	</div>
+
+
+
+
+    </div>
+	<hr>
+	<h5>Our footer</h5>
+	
+	
+</body>
+
+
+
+
+</html>
+
+

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+<head>
+<title>
+	Booking
+</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+   <link rel="stylesheet" type="text/css" href="{% static 'first_app\fontawesome-free-5.11.2-web\css\all.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'first_app\bootstrap\css\bootstrap.css' %}" >
+
+
+<link rel="stylesheet" type="text/css" href="{% static 'staay.css' %}">
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<style>
+  img{
+    height: 30px;
+  }
+</style>
+</head>
+
+<body style="background-color: black">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" >
+  <a class="navbar-brand" href="#"><img src="{% static 'first_app/images/nuno.png' %}"></a>
+ 
+        <a class="nav-link" href="{% url 'abc' %}" style=" text-align: right;"><span style="color: white;">Home <span class="sr-only">(current)</span></a>
+       
+  </nav>
+
+
+<div class="split left" style="background-image: url({% static 'first_app/images/11.jpg' %});">
+</div>
+
+<div class="split right">
+<form method='POST' action="{% url 'stay_login' %}" >
+{% csrf_token %}
+ <div class='container'>
+   
+  
+    {% if messages %}
+      <ul class='messages'>
+        {% for message in messages %}
+          <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>{{message}}</strong> 
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        {% endfor %}
+    {% endif %}  
+    </ul> 
+  </div>
+
+    <div class='container d-flex justify-content-center'>
+      
+      <div class='card' style="margin-top: 100px;">
+        <div style="padding-left: 170px; background-color: rgba(0,0,0,0); border: none; " class="card-header">
+           <i style="font-size: 100px;" class="fa fa-unlock-alt" aria-hidden="true"></i>
+         </div>
+        <div style="color: black; background-color: rgba(86,178,240,0); text-align: center; border: none; " class='card-header'>
+
+          <h1 >LOGIN</h1>
+          <h6>Please login with the username and password provided to you</h6>
+        </div>
+        <div class='card-body'>
+            <div class='input-group form-group'>
+              <div  class='input-group-prepend'>
+                <!-- <span style="margin-right: 10px " class='input-group-text'>
+                  <i  class="fas fa-user"></i>
+                </span> -->
+              </div>
+            <!--   <span style="color: black"> 
+             <b>Username</b></span> -->
+              <span style="margin-left: 20px" ><input style="height: 30px; width: 360px; border-radius: 25px;" type="text" name="Username" class="form-control" placeholder="Username" required></span>
+            </div>
+            
+            <div class='input-group form-group'>
+              <div class='input-group-prepend'>
+                <!-- <span style="margin-right: 10px"  class='input-group-text'>
+                  <i class="fas fa-unlock-alt"></i>
+                </span> -->
+              </div>
+             <!-- <span style="color: black"> 
+             <b>Password</b></span> -->
+              <span style="margin-left: 20px" ><input style="height: 30px; width: 360px; border-radius: 25px;" type="Password" name="Password" class="form-control" placeholder="Password" required></span>
+            </div>
+            
+            <div class='form-group'>
+              <input style="width: 400px;border-radius: 25px;" type='submit' value='Login' class='btn btn-primary' >
+            </div>
+
+            
+          
+        </div>
+      </div>
+    
+  </div>  
+
+
+
+</form>	
+</div>	
+
+</body>
+</html>

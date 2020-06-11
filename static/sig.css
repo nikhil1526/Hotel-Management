@@ -1,0 +1,21 @@
+.card{
+	margin-bottom: 20%;
+	margin-top: 20%;
+	padding-right: 10px;
+	padding-left: 10px;
+	height: 60%;
+	width: 40%;
+	background-color: rgba(245,245,245,0);
+	border: none;
+}
+
+
+body{
+background-size: cover;
+	background-repeat: no-repeat;
+	height: 100%;
+
+opacity: 1;
+
+}
+

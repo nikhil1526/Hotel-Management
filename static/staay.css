@@ -1,0 +1,46 @@
+
+
+.split {
+  height: 100%;
+  width: 50%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  overflow-x: hidden;
+  padding-top: 20px;
+  margin-top: 55px;
+  margin-bottom: 55px;
+}
+
+.left {
+  left: 0;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100%;
+  margin-left: 55px;
+  border-top-left-radius: 25px;
+  border-bottom-left-radius: 25px;
+
+opacity: 1;
+}
+
+.right {
+  right: 0;
+  background-color: white ;
+  margin-right: 55px;
+  border-top-right-radius: 25px;
+  border-bottom-right-radius: 25px;
+}
+
+.card{
+
+  margin-bottom: 20%;
+  margin-top: 20%;
+  padding-right: 10px;
+  padding-left: 10px;
+  height: 80%;
+  width: 60%;
+  background-color: rgba(245,245,245,0);
+  border: none;
+}
+

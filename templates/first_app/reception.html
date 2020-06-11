@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+<head>
+<title>
+	Reception
+</title>
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+   <link rel="stylesheet" type="text/css" href="{% static 'first_app\fontawesome-free-5.11.2-web\css\all.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'first_app\bootstrap\css\bootstrap.css' %}" >
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <style>
+  	canvas{
+
+  width:1100px !important;
+  height:700px !important;
+  margin-top: 40px;
+
+}
+img{
+  height: 30px;
+ }
+  </style>
+
+  
+</head>
+<body>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark" >
+  <a class="navbar-brand" href="#"><img src="{% static 'first_app/images/nuno.png' %}"></a>
+ 
+        <a class="nav-link" href="{% url 'details' %}" style=" text-align: right;"><span style="color: white;">Details <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="{% url 'checking' %}" style=" text-align: right;"><span style="color: white;">New Booking <span class="sr-only">(current)</span></a>
+         <a class="nav-link" href="{% url 'logout' %}" style=" text-align: right;"><span style="color: white;">Logout <span class="sr-only">(current)</span></a>
+  </nav>
+	<div class="container">
+		<ul class="nav nav-pills">
+    <li class="active"><a data-toggle="pill" href="#home">Weekly Report</a></li>
+    <li><a data-toggle="pill" href="#menu1">Monthly Report</a></li>
+
+  </ul>
+  
+  <div class="tab-content">
+    <div id="home" class="tab-pane fade in active">
+    	<h4 style="margin-top: 20px">Enter the date to get the occupancy report of the last week before the date</h4>
+    	<form method="POST">
+    		{% csrf_token %}
+    		<label style="margin-top: 20px" for="checkin">Enter date</label>
+    		<input type="text" name="date" class="form-control datepicker" placeholder="Date" id="checkin" required>
+    		<button style="width: 25%; margin-top: 20px" type="submit" class="btn btn-primary btn-md">Submit</button>
+    	</form>
+      <h3>Weekly Occupancy Report</h3>
+      <table class="table table-bordered">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Dates</th>
+      <th scope="col">Economy</th>
+      <th scope="col">Deluxe</th>
+      <th scope="col">SuperDeluxe</th>
+      <th scope="col">Suite</th>
+      <th scope="col">Total</th>
+       <th scope="col">Total Revenue</th>
+
+    </tr>
+  </thead>
+  <tbody>
+  	{% for d,n,c in number %}
+    <tr>
+      <th scope="row">{{c}}</th>
+      <td>{{d}}</td>
+      {% for x in n %}
+      <td>{{x}}</td>
+
+      {% endfor %}
+       
+    </tr>
+    {% endfor %}
+     </tbody>
+</table>
+
+<h3 style="margin-top: 40px">Weekly Occupancy Representation(By Rooms) </h3>
+<canvas id="myChart" width="300" height="300"></canvas>
+<h3 style="margin-top: 40px">Total Weekly Occupancy Representation</h3>
+<canvas id="total" width="300" height="300"></canvas>
+
+
+    </div>
+    <div id="menu1" class="tab-pane fade">
+      <h3>Monthly Report</h3>
+      <table class="table table-bordered">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Months</th>
+      <th scope="col">Economy</th>
+      <th scope="col">Deluxe</th>
+      <th scope="col">SuperDeluxe</th>
+      <th scope="col">Suite</th>
+      <th scope="col">Total</th>
+
+    </tr>
+  </thead>
+  <tbody>
+  	{% for d,n in month %}
+    <tr>
+      <th scope="row">{{forloop.counter}}</th>
+      <td>{{d}}</td>
+      {% for x in n %}
+      <td>{{x}}</td>
+
+      {% endfor %}
+       
+    </tr>
+    {% endfor %}
+     </tbody>
+</table>
+
+<h3 style="margin-top: 40px">Monthly Report Representation(By Rooms) </h3>
+<canvas id="monthly" width="300" height="300"></canvas>
+<h3 style="margin-top: 40px">Total Monthly Report Representation</h3>
+<canvas id="total_monthly" width="300" height="300"></canvas>
+
+
+    </div>
+    
+  </div>
+</div>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+   <script>
+  $( function() {
+    $( ".datepicker" ).datepicker();
+  } );
+  </script>	
+
+   <script>
+
+ 	
+var ctx = document.getElementById('total').getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels:[{% for d in dates %} 
+        "{{ d }}", {% endfor %}] ,
+        datasets: [{
+            label: 'Total Occupancy',
+            data: [{% for n in rooms %}
+            {% for r in n %}
+            {% if forloop.counter == 5 %}
+             "{{r}}",
+             {% endif %} {% endfor %} {% endfor %}],
+            backgroundColor: [
+            		'rgba(255, 128, 170,0.6)',
+             	'rgba(255, 128, 170,0.6)',
+             	'rgba(255, 128, 170,0.6)',
+             	'rgba(255, 128, 170,0.6)',
+             	'rgba(255, 128, 170,0.6)',
+             	'rgba(255, 128, 170,0.6)',
+             	'rgba(255, 128, 170,0.6)'
+               
+
+            ],
+            // borderColor: [
+            //     'rgba(255, 99, 132, 1)',
+            //     'rgba(54, 162, 235, 1)',
+            //     'rgba(255, 206, 86, 1)',
+            //     'rgba(75, 192, 192, 1)',
+            //     'rgba(153, 102, 255, 1)',
+            //     'rgba(255, 159, 64, 1)'
+            // ],
+            borderWidth: 1
+       
+          
+
+
+
+        }]
+    },
+    options: {
+    	responsive: true,
+    	maintainAspectRatio: false,
+        scales: {
+
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                    // suggestedMax: maxvalue+5
+                }
+            }]
+        }
+    }
+});
+</script>
+ 	 <script>
+var ctx = document.getElementById('myChart').getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels:[{% for d in dates %} 
+        "{{ d }}", {% endfor %}] ,
+        datasets: [{
+            label: 'Economy',
+            data: [{% for n in rooms %}
+            {% for r in n %}
+            {% if forloop.counter == 1 %}
+             "{{r}}",
+             {% endif %} {% endfor %} {% endfor %}],
+            backgroundColor: [
+                'rgba(179, 179, 179,0.7)',
+                'rgba(179, 179, 179,0.7)',
+                'rgba(179, 179, 179,0.7)',
+                'rgba(179, 179, 179,0.7)',
+                'rgba(179, 179, 179,0.7)',
+                'rgba(179, 179, 179,0.7)',
+                'rgba(179, 179, 179,0.7)'
+
+            ],
+            // borderColor: [
+            //     'rgba(255, 99, 132, 1)',
+            //     'rgba(54, 162, 235, 1)',
+            //     'rgba(255, 206, 86, 1)',
+            //     'rgba(75, 192, 192, 1)',
+            //     'rgba(153, 102, 255, 1)',
+            //     'rgba(255, 159, 64, 1)'
+            // ],
+            borderWidth: 1
+        },
+        { label: ' Deluxe',
+            data: [{% for n in rooms %}
+            {% for r in n %}
+            {% if forloop.counter == 2 %}
+             "{{r}}",
+             {% endif %} {% endfor %} {% endfor %}],
+            type:'bar',
+             backgroundColor: [
+             	'rgba(255, 128, 170,0.6)',
+             	'rgba(255, 128, 170,0.6)',
+             	'rgba(255, 128, 170,0.6)',
+             	'rgba(255, 128, 170,0.6)',
+             	'rgba(255, 128, 170,0.6)',
+             	'rgba(255, 128, 170,0.6)',
+             	'rgba(255, 128, 170,0.6)'
+                
+            ] 
+
+
+          },
+        { label: ' SuperDeluxe',
+            data: [{% for n in rooms %}
+            {% for r in n %}
+            {% if forloop.counter == 3 %}
+             "{{r}}",
+             {% endif %} {% endfor %} {% endfor %}],
+            type:'bar',
+            backgroundColor: [
+                'rgb(128, 191, 255,0.6)',
+                'rgb(128, 191, 255,0.6)',
+                'rgb(128, 191, 255,0.6)',
+                'rgb(128, 191, 255,0.6)',
+                'rgb(128, 191, 255,0.6)',
+                'rgb(128, 191, 255,0.6)',
+                'rgb(128, 191, 255,0.6)'
+            ]  
+         },
+        { label: ' Suite',
+            data: [{% for n in rooms %}
+            {% for r in n %}
+            {% if forloop.counter == 4 %}
+             "{{r}}",
+             {% endif %} {% endfor %} {% endfor %}],
+            type:'bar',
+             backgroundColor: [
+                'rgba(255, 255, 128,0.6)',
+                'rgba(255, 255, 128,0.6)',
+                'rgba(255, 255, 128,0.6)',
+                'rgba(255, 255, 128,0.6)',
+                'rgba(255, 255, 128,0.6)',
+                'rgba(255, 255, 128,0.6)',
+                'rgba(255, 255, 128,0.6)'
+            ]     
+
+
+
+        }]
+    },
+    options: {
+    	responsive: true,
+    	maintainAspectRatio: false,
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+});
+</script>
+
+
+<script>
+
+ 	
+var ctx = document.getElementById('total_monthly').getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels:[{% for d in months %} 
+        "{{ d }}", {% endfor %}] ,
+        datasets: [{
+            label: 'Total Occupancy',
+            data: [{% for n in month_rooms %}
+            {% for r in n %}
+            {% if forloop.counter == 5 %}
+             "{{r}}",
+             {% endif %} {% endfor %} {% endfor %}],
+            backgroundColor: [
+            		'rgba(255, 128, 170,0.6)',
+             	'rgba(255, 128, 170,0.6)',
+             	'rgba(255, 128, 170,0.6)',
+             	'rgba(255, 128, 170,0.6)',
+             	'rgba(255, 128, 170,0.6)',
+             	'rgba(255, 128, 170,0.6)',
+             	'rgba(255, 128, 170,0.6)'
+               
+
+            ],
+            // borderColor: [
+            //     'rgba(255, 99, 132, 1)',
+            //     'rgba(54, 162, 235, 1)',
+            //     'rgba(255, 206, 86, 1)',
+            //     'rgba(75, 192, 192, 1)',
+            //     'rgba(153, 102, 255, 1)',
+            //     'rgba(255, 159, 64, 1)'
+            // ],
+            borderWidth: 1
+       
+          
+
+
+
+        }]
+    },
+    options: {
+    	responsive: true,
+    	maintainAspectRatio: false,
+        scales: {
+
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                    // suggestedMax: maxvalue+5
+                }
+            }]
+        }
+    }
+});
+</script>
+ 	 <script>
+var ctx = document.getElementById('monthly').getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels:[{% for d in months %} 
+        "{{ d }}", {% endfor %}] ,
+        datasets: [{
+            label: 'Economy',
+            data: [{% for n in month_rooms %}
+            {% for r in n %}
+            {% if forloop.counter == 1 %}
+             "{{r}}",
+             {% endif %} {% endfor %} {% endfor %}],
+            backgroundColor: [
+                'rgba(179, 179, 179,0.7)',
+                'rgba(179, 179, 179,0.7)',
+                'rgba(179, 179, 179,0.7)',
+                'rgba(179, 179, 179,0.7)',
+                'rgba(179, 179, 179,0.7)',
+                'rgba(179, 179, 179,0.7)',
+                'rgba(179, 179, 179,0.7)'
+
+            ],
+            // borderColor: [
+            //     'rgba(255, 99, 132, 1)',
+            //     'rgba(54, 162, 235, 1)',
+            //     'rgba(255, 206, 86, 1)',
+            //     'rgba(75, 192, 192, 1)',
+            //     'rgba(153, 102, 255, 1)',
+            //     'rgba(255, 159, 64, 1)'
+            // ],
+            borderWidth: 1
+        },
+        { label: ' Deluxe',
+            data: [{% for n in month_rooms %}
+            {% for r in n %}
+            {% if forloop.counter == 2 %}
+             "{{r}}",
+             {% endif %} {% endfor %} {% endfor %}],
+            type:'bar',
+             backgroundColor: [
+             	'rgba(255, 128, 170,0.6)',
+             	'rgba(255, 128, 170,0.6)',
+             	'rgba(255, 128, 170,0.6)',
+             	'rgba(255, 128, 170,0.6)',
+             	'rgba(255, 128, 170,0.6)',
+             	'rgba(255, 128, 170,0.6)',
+             	'rgba(255, 128, 170,0.6)'
+                
+            ] 
+
+
+          },
+        { label: ' SuperDeluxe',
+            data: [{% for n in month_rooms %}
+            {% for r in n %}
+            {% if forloop.counter == 3 %}
+             "{{r}}",
+             {% endif %} {% endfor %} {% endfor %}],
+            type:'bar',
+            backgroundColor: [
+                'rgb(128, 191, 255,0.6)',
+                'rgb(128, 191, 255,0.6)',
+                'rgb(128, 191, 255,0.6)',
+                'rgb(128, 191, 255,0.6)',
+                'rgb(128, 191, 255,0.6)',
+                'rgb(128, 191, 255,0.6)',
+                'rgb(128, 191, 255,0.6)'
+            ]  
+         },
+        { label: ' Suite',
+            data: [{% for n in month_rooms %}
+            {% for r in n %}
+            {% if forloop.counter == 4 %}
+             "{{r}}",
+             {% endif %} {% endfor %} {% endfor %}],
+            type:'bar',
+             backgroundColor: [
+                'rgba(255, 255, 128,0.6)',
+                'rgba(255, 255, 128,0.6)',
+                'rgba(255, 255, 128,0.6)',
+                'rgba(255, 255, 128,0.6)',
+                'rgba(255, 255, 128,0.6)',
+                'rgba(255, 255, 128,0.6)',
+                'rgba(255, 255, 128,0.6)'
+            ]     
+
+
+
+        }]
+    },
+    options: {
+    	responsive: true,
+    	maintainAspectRatio: false,
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+});
+</script>
+
+</body>
+</html>
+

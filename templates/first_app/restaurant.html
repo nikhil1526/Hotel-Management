@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+    <head>
+        <title>A-la-Carte</title>
+        <meta name="description" content="This is the description">
+        <link rel="stylesheet" href="{% static 'resta.css' %}" >
+        
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="{% static 'first_app\fontawesome-free-5.11.2-web\css\all.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'first_app\bootstrap\css\bootstrap.css' %}" >
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <script src="{% static 'rr.js' %}" async></script>
+        <style>
+.mySlides {display:none;}
+</style>
+    </head>
+    <body style="background-color: rgba(38,38,38,1);">
+
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark" >
+  <a class="navbar-brand" href="#"><img src="{% static 'first_app/images/nuno.png' %}"></a>
+ 
+        <a class="nav-link" href="{% url 'guest_dashboard' %}" style=" text-align: right;"><span style="color: white;">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="{% url 'staylogout' %}" style=" text-align: right;"><span style="color: white;">Logout <span class="sr-only">(current)</span></a>
+
+       
+  </nav>
+    	<!-- <div class="w3-content w3-display-container"> -->
+            <img class="mySlides" src="{% static 'first_app/images/chinese.jpg' %}" style="width:100%; height: 400px;">
+            <img class="mySlides" src="{% static 'first_app/images/indian1.jpg' %}" style="width:100%; height: 400px;">
+  <img class="mySlides" src="{% static 'first_app/images/indian.jpg' %}" style="width:100%; height: 400px;">
+  <img class="mySlides" src="{% static 'first_app/images/indian2.jpg' %}" style="width:100%; height: 400px;">
+  <img class="mySlides" src="{% static 'first_app/images/indian3.jpg' %}" style="width:100%; height: 400px;">
+  <img class="mySlides" src="{% static 'first_app/images/r.png' %}" style="width:100%; height: 400px;">
+
+
+
+<!--   <button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
+  <button class="w3-button w3-black w3-display-right" onclick="plusDivs(1)">&#10095;</button> -->
+<!-- </div> -->
+
+
+
+        <header class="main-header">
+            <!---<nav class="main-nav nav">
+                <ul>
+                    <li><a href="index.html">HOME</a></li>
+                    <li><a href="store.html">STORE</a></li>
+                    <li><a href="about.html">ABOUT</a></li>
+                </ul>
+            </nav>---->
+            <!-- <h1 class="band-name band-name-large">All Day Menu</h1> -->
+        </header>
+        {% if messages %}
+      <ul class='messages'>
+        {% for message in messages %}
+          <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>{{message}}</strong> 
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        {% endfor %}
+    {% endif %} 
+        <section style="margin-top: 40px" class="container content-section" >
+            <div class="row">
+                <div class="col-lg-4" style="align-items: center;">
+                    <h2  style="color: white; border-bottom: 1px solid white;">Vegetarian</h2>
+                    <div class="row">
+                        <table>
+                            <tbody>
+                                {% for i in veg %}
+                                <tr>
+                                    <td><h4 id="title" class="shop-item-title" style="color: white; margin-left: 30px; margin-top: 20px">{{i.Food_Item}}</h4></td>
+                                    <td><h4 id="price" class="shop-item-price" style="color: white; margin-left: 30px; margin-top: 20px">${{i.Price}}</h4></td>
+                                    <td> <button class=" btn-lg shop-item-button" style=" background-color: yellow; margin-right:30px; ">Add</button></td>
+                                </tr>
+                                {% endfor %}
+                            
+                            </tbody>
+                        </table>
+                      
+                    </div>
+                  
+                    
+                </div>
+                <div class="col-lg-4" style="align-items: center;">
+                    <h2  style="color: white; border-bottom: 1px solid white;">Non-Vegetarian</h2>
+                    <div class="row">
+                        <table>
+                            <tbody>
+                                {% for i in non %}
+                                <tr>
+                                    <td><h4 id="title" class="shop-item-title" style="color: white; margin-left: 30px; margin-top: 20px">{{i.Food_Item}}</h4></td>
+                                    <td><h4 id="price" class="shop-item-price" style="color: white; margin-left: 30px; margin-top: 20px">${{i.Price}}</h4></td>
+                                    <td> <button class=" btn-lg shop-item-button" style=" background-color: yellow; margin-right:30px; ">Add</button></td>
+                                </tr>
+                                {% endfor %}
+                            
+                            </tbody>
+                        </table>
+                      
+                    </div>
+                  
+                    
+                </div>
+                <div class="col-lg-4" style="align-items: center;">
+                    <h2  style="color: white; border-bottom: 1px solid white;">Indian Breads</h2>
+                    <div class="row">
+                        <table>
+                            <tbody>
+                                {% for i in bread %}
+                                <tr>
+                                    <td><h4 id="title" class="shop-item-title" style="color: white; margin-left: 30px; margin-top: 20px">{{i.Food_Item}}</h4></td>
+                                    <td><h4 id="price" class="shop-item-price" style="color: white; margin-left: 30px; margin-top: 20px">${{i.Price}}</h4></td>
+                                    <td> <button class=" btn-lg shop-item-button" style=" background-color: yellow; margin-right:30px; ">Add</button></td>
+                                </tr>
+                                {% endfor %}
+                            
+                            </tbody>
+                        </table>
+                      
+                    </div>
+                  
+                    
+                </div>
+               
+                
+                
+            </div>
+
+
+        
+        </section>
+        <section style="margin-top: 40px;" class="container content-section" >
+            <div class="row">
+                <div class="col-lg-4" style="align-items: center;">
+                    <h2  style="color: white; border-bottom: 1px solid white;">Chinese</h2>
+                    <div class="row">
+                        <table>
+                            <tbody>
+                                {% for i in chinese %}
+                                <tr>
+                                    <td><h4 id="title" class="shop-item-title" style="color: white; margin-left: 30px; margin-top: 20px">{{i.Food_Item}}</h4></td>
+                                    <td><h4 id="price" class="shop-item-price" style="color: white; margin-left: 30px; margin-top: 20px">${{i.Price}}</h4></td>
+                                    <td> <button class=" btn-lg shop-item-button" style=" background-color: yellow; margin-right:30px; ">Add</button></td>
+                                </tr>
+                                {% endfor %}
+                            
+                            </tbody>
+                        </table>
+                      
+                    </div>
+                  
+                    
+                </div>
+                <div class="col-lg-4" style="align-items: center;">
+                    <h2  style="color: white; border-bottom: 1px solid white;">Indian soups</h2>
+                    <div class="row">
+                        <table>
+                            <tbody>
+                                {% for i in soup %}
+                                <tr>
+                                    <td><h4 id="title" class="shop-item-title" style="color: white; margin-left: 30px; margin-top: 20px">{{i.Food_Item}}</h4></td>
+                                    <td><h4 id="price" class="shop-item-price" style="color: white; margin-left: 30px; margin-top: 20px">${{i.Price}}</h4></td>
+                                    <td> <button class=" btn-lg shop-item-button" style=" background-color: yellow; margin-right:30px; ">Add</button></td>
+                                </tr>
+                                {% endfor %}
+                            
+                            </tbody>
+                        </table>
+                      
+                    </div>
+                  
+                    
+                </div>
+                <div class="col-lg-4" style="align-items: center;">
+                    <h2  style="color: white; border-bottom: 1px solid white;">Desserts</h2>
+                    <div class="row">
+                        <table>
+                            <tbody>
+                                {% for i in dessert %}
+                                <tr>
+                                    <td><h4 id="title" class="shop-item-title" style="color: white; margin-left: 30px; margin-top: 20px">{{i.Food_Item}}</h4></td>
+                                    <td><h4 id="price" class="shop-item-price" style="color: white; margin-left: 30px; margin-top: 20px">${{i.Price}}</h4></td>
+                                    <td> <button class=" btn-lg shop-item-button" style=" background-color: yellow; margin-right:30px; ">Add</button></td>
+                                </tr>
+                                {% endfor %}
+                            
+                            </tbody>
+                        </table>
+                      
+                    </div>
+                  
+                    
+                </div>
+               
+                
+                
+            </div>
+
+
+        
+        </section>
+
+
+
+        <section style="margin-top: 100px" class="container content-section">
+
+            <!-- <h2 class="section-header">Breads</h2>
+            <div class="shop-items">
+                <div class="shop-item">
+                    <span class="shop-item-title">Tandoori-Roti</span>
+                    <img class="shop-item-image" src="img/roti.png">
+                    <div class="shop-item-details">
+                        <span class="shop-item-price">$20</span>
+                        <button class="btn btn-primary shop-item-button" type="button">ADD TO CART</button>
+                    </div>
+                </div>
+                <div class="shop-item">
+                    <span class="shop-item-title">Butter Naan</span>
+                    <img class="shop-item-image" src="img/bn.png">
+                    <div class="shop-item-details">
+                        <span class="shop-item-price">$30</span>
+                        <button class="btn btn-primary shop-item-button" type="button">ADD TO CART</button>
+                    </div>
+                </div>
+            </div> -->
+        </section>
+
+        <section class="container content-section">
+            <form method="POST" action="{% url 'restaurant' %}">
+                {% csrf_token %}
+            <h2 class="section-header" style="color: white;">CART</h2>
+            <div class="cart-row">
+                <span class="cart-item cart-header cart-column" style="color: white;">ITEM</span>
+                <span class="cart-price cart-header cart-column" style="color: white">PRICE</span>
+                <span class="cart-quantity cart-header cart-column" style="color: white">QUANTITY</span>
+            </div>
+            <div class="cart-items">
+            </div>
+            <div class="cart-total">
+                <strong class="cart-total-title" style="color: white">Total</strong>
+                <span class="cart-total-price" style="color: yellow;">$0</span>
+            </div>
+            <button class="btn btn-primary btn-purchase" type="submit">PLACE ORDER</button>
+        </form>
+
+        </section>
+      
+
+        <script>
+var slideIndex = 0;
+carousel();
+
+function carousel() {
+  var i;
+  var x = document.getElementsByClassName("mySlides");
+  for (i = 0; i < x.length; i++) {
+    x[i].style.display = "none";
+  }
+  slideIndex++;
+  if (slideIndex > x.length) {slideIndex = 1}
+  x[slideIndex-1].style.display = "block";
+  setTimeout(carousel, 2000); // Change image every 2 seconds
+}
+        	
+
+        </script>
+    </body>
+</html>

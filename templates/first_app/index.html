@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Nuno - Responsive Bootstrap Theme</title>
+	  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+   <link rel="stylesheet" type="text/css" href="{% static 'first_app\fontawesome-free-5.11.2-web\css\all.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'first_app\bootstrap\css\bootstrap.css' %}" >
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+		<link rel="stylesheet" href="{% static 'fixed.css' %}">
+	<link rel="stylesheet" href="{% static 'sss.css' %}">
+</head>
+ 
+<body data-spy="scroll" data-target="navbarResponsive">
+<!-- start section-->
+
+
+<div id="home">
+	
+	<!---nav -->
+<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+	<a class="navbar-brand" href="#"><img src="{% static 'first_app/images/nuno.png' %}"></a>
+
+	<button class="navbar-toggler" type="button" data-toggle="collapse"  data-target="#navbarResponsive"  >
+		<span class="navbar-toggler-icon"></span>
+	</button>
+
+	<div class="collapse navbar-collapse" id="navbarResponsive" >
+
+		<ul class="navbar-nav ml-auto">
+			<li class="nav-item"  >
+				<a href="#home"><span style="color: white">home</span></a>
+			</li>
+			<li class="nav-item"  >
+				<a href="#rooms"><span style="color: white">rooms</span></a>
+			</li>
+			<li class="nav-item"  >
+				<a href="#resources"><span style="color: white">Features</span></a>
+			</li>
+			<li class="nav-item"  >
+				<a href="#clients"><span style="color: white">Testimonials</span></a>
+			</li>
+			<li class="nav-item"  >
+				<a href="#contact"><span style="color: white">Contact</span></a>
+			</li>
+			
+			<li class="nav-item"  >
+				<a href="{% url 'stay' %}"><span style="color: white">Hotel Stay</span></a>
+			</li>
+			<li class="nav-item"  >
+				<a href="{% url 'login' %}"><span style="color: white">Login</span></a>
+			</li>
+		</ul>
+		
+	</div>
+</nav>
+
+
+
+<!-- nav end-->
+<!--landing page start-->
+<div class="landing">
+	<div class="home-wrap">
+		<div class="home-inner" style="background-image: url({% static 'first_app/images/h.png' %});
+">
+			
+		</div>
+		
+	</div>
+	
+</div>
+
+<div class="caption text-center">
+	<h1>Welcome To Nuno</h1>
+	<h3>
+		Amritsar
+	</h3>
+	<a class="btn btn-outline-light btn-lg" href="#course">Have A visit</a>
+</div>
+<!--end if landing page-->
+
+</div>
+
+<!--end sectiron-->
+<!-- start  homesection-->
+
+<!--end sectiron-
+
+<div id="course" class="offset"></div>
+
+<div class="col-12" narrow text-center>
+	<h1>Nuno theme most AVA corse</h1>
+	<p class="lead"></p>
+	<a class="bt btn-secondarybtn-md"  href="#" target="_blank">
+	fgjmfjfk</a>
+
+
+</div>
+-->
+
+
+<!--end sectiron-->
+
+<!-- start features section-->
+
+
+<div id="rooms" class="offset"></div>
+
+<!---
+<div class="jumbotron"> 
+	<div class="narrow text-center">
+		<div class="col-12">
+			<h3 class="heading">FEatures</h3>
+			<div class="heading-underline">
+				
+			</div>
+		
+		</div>
+
+		<div class="row text-center">
+			
+
+			<div class="col-md-4">
+				<div class="feature">
+					<span class="glyphicon">&#xe001;</span>
+					<i class="fas fa-play cirlcefa-4x" data-fa-transform="shrink-3 up-5"></i>
+					<h3>sbsbsbs</h3>
+					<p>sbbddndn</p>
+				</div>
+				
+			</div>
+		
+
+		<div class="col-md-4">
+				<div class="feature">
+					<i class="fas fa-sliders-h fa-4x" data-fa-transform="shrink-3 up-5"></i>
+					<h3>sbsbsbs</h3>
+					<p>sbbddndn</p>
+				</div>
+				
+			</div>
+		
+
+		<div class="col-md-4">
+				<div class="feature">
+					<i class="fab fa-wpforms fa-4x" data-fa-transform="shrink-3 up-5"></i>
+					<h3>sbsbsbs</h3>
+					<p>sbbddndn</p>
+				</div>
+				
+			</div>
+		</div>
+		</div>
+	</div>
+</div>
+
+--->
+<!--end  features sectiron-->
+
+<!---<div id="rooms" class="offset"></div>---->
+
+
+<div class="jumbotron"> 
+	<div class="narrow">
+		<div class="col-12 text-center">
+			<h3 class="heading"> ROOMS</h3>
+			<div class="heading-underline">
+				
+			</div>
+		
+		</div>
+
+		<div class="row text-center">
+			
+
+			<div class="col-md-3">
+				<div class="card" style="width: 17rem;">
+
+  <img class="card-img-top" src="{% static 'first_app/images/eco.png' %}" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">Economy</h5>
+
+    <p class="card-text">For a comfortable stay, book one of our Superior Rooms. Everything you need is already in the room.</p>
+    <a href="#" class="btn btn-primary">1500/-</a>
+  </div>
+</div>
+				
+			</div>
+		
+
+		<div class="col-md-3">
+				<div class="card" style="width: 17rem;">
+	 		 <img class="card-img-top" src="{% static 'first_app/images/del.png' %}" alt="Card image cap">
+	 					 <div class="card-body">
+	    						<h5 class="card-title">Deluxe</h5>
+	    								<p class="card-text">Our Deluxe Rooms are ideal if you enjoy spacious surroundings with extra    comfort          .Everything you need is already in the room.</p>
+	   						 <a href="#" class="btn btn-primary">3000/-</a>
+	  						</div>
+			</div>
+				
+			</div>
+			<div class="col-md-3">
+				<div class="card  mb-3" style="width: 17rem;">
+	 		 <img class="card-img-top" src="{% static 'first_app/images/s.png' %}" alt="Card image cap">
+	 					 <div class="card-body">
+	    						<h5 class="card-title">Super Deluxe</h5>
+	    								<p class="card-text">For an extended stay or for extra space, choose one of our Super Deluxe room featuring a separate living area
+	    								.</p>
+	   						 <a href="#" class="btn btn-primary">4000/-</a>
+	  						</div>
+			</div>
+				
+			</div>
+		
+
+				<div class="col-md-3">
+				<div class="card" style="width: 17rem;">
+	 		 <img class="card-img-top" src="{% static 'first_app/images/suite.png' %}" alt="Card image cap">
+	 					 <div class="card-body">
+	    						<h5 class="card-title">Suite</h5>
+	    								<p class="card-text">The expansive Presidential Suite boasts a separate living area with a large workstation and a dining area.</p>
+	   						 <a href="#" class="btn btn-primary">5000/-</a>
+	  						</div>
+			</div>
+				
+			</div>
+				
+			</div>
+		</div>
+		</div>
+	</div>
+</div>
+
+
+<!-- start ##resources section-->
+
+
+<div id="resources" class="offset"></div>
+
+
+
+<div class="fixed-background" style="background:linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ),  url({% static 'first_app/images/pp.png' %}) no-repeat center fixed;">
+	<div class="row dark  text-center">
+				<div class="col-12">
+			<h3 class="">Services</h3>
+			<div class="heading-underline"></div>
+		
+		</div>
+		<div class="col-md-4">
+			<h3>Tavolo Mondo-24 x 7</h3>
+
+				<div class="feature">
+					<i class="fas fa-utensils fa-3x data-fa-transform="shrink-3 up-5" ></i>
+					
+				</div>
+					
+					<p class="lead">Offering bountiful, contemporary buffets and delicious local and international à la carte options, Tavolo Mondo is your stop for fine dining in Amritsar. </p>
+				
+				
+			</div>
+
+			<div class="col-md-4">
+			<h3>Proof - The Bar</h3>
+
+				<div class="feature">
+					
+					<i class="fas fa-cocktail fa-3x"></i>
+				</div>
+					
+					<p class="lead">Illuminated by a warm red hue from the floor-to-ceiling wine rack, Proof - The Bar boasts a chic atmosphere for sipping drinks and nibbling on small bites.</p>
+				
+				
+			</div>
+
+			<div class="col-md-4">
+			<h3>Zardoz- Fitness-Center and Spa</h3>
+
+				<div class="feature">
+					
+					<i class="fas fa-dumbbell fa-3x"></i>
+					</i>
+				</div>
+					
+					<p class="lead">Find your balance at Zardoz Spa. Our modern fitness center challenges you to an invigorating workout with state-of-the-art exercise equipment and professional free weights.</p>
+				
+				
+			</div>
+	</div>
+	<!--end row--->
+</div>
+<!--end  ##resources sectiron-->
+
+	<div class="fixed-wrap">
+		<div class="fixed">
+			
+		</div>
+		
+	</div>
+	
+
+
+<!-- start ##resources section-->
+
+
+<!--<div id="clients" class="offset"></div>-->
+
+<!--end  ##resources sectiron-->
+<div id="clients"class="jumbotron">
+	<div class="col-12 text-center">
+			<h3 class="">Testimonials</h3>
+			<div class="heading-underline"></div>
+		
+		</div>
+
+
+		<div class="row">
+			<div class="col-md-6 clients">
+				<div class="row">
+					<div class="col-md-4">
+						<img src="{% static 'first_app/images/bb.png' %}">
+				</div>
+				<div class="col-md-8">
+					<blockquote>
+						<i class="fas fa-quote-left"></i>
+						Wondeful Staff
+						<hr class="clients-hr">
+						<cite>&#8212: Babbu Maan,Artist</cite>
+					</blockquote>
+				</div>
+			</div>
+		</div>
+
+
+
+
+		<div class="col-md-6 clients">
+				<div class="row">
+					<div class="col-md-4">
+						<img src="{% static 'first_app/images/k.png' %}">
+				</div>
+				<div class="col-md-8">
+					<blockquote>
+						<i class="fas fa-quote-left"></i>
+						pure
+						<hr class="clients-hr">
+						<cite>&#8212: Dukhbir Pagal,Artist</cite>
+					</blockquote>
+				</div>
+			</div>
+		</div>
+</div><!---end jumbo-->
+
+<!-- start ##resources section-->
+
+
+<div id="contact" class="offset"></div>
+
+<!--end  ##resources sectiron-->
+<footer>
+	<div class="row justify-content-center">
+		<div class="col-md-5 text-center">
+			<img src="{% static 'first_app/images/nuno.png' %}">
+			<p> Feel Free To Contact Us</p>
+			<strong>Contact Information</strong>
+			<p>(888) 888-8888<br>email@cs.com<br>12, Airport Road</p>
+			<a href="" target="_blank"><i class="fab fa-facebook-square"></i></a>
+			<a href="" target="_blank"><i class="fab fa-twitter-square"></i></a>
+			<a href="" target="_blank"><i class="fab fa-instagram"></i></a>
+		
+
+
+		</div>
+		<hr class="socket">
+		&copy:Amritsar Developers.
+	</div>
+</footer>
+
+
+
+<!-- start ##resources section-->
+
+
+
+<!--end  ##resources sectiron-->
+
+
+
+
+
+
+
+
+
+<!--- Script Source Files -->
+<script src="js/jquery-3.3.1.min.js"></script>
+<script src="bootstrap-4.1.3-dist/js/bootstrap.min.js"></script>
+<script src="https://use.fontawesome.com/releases/v5.5.0/js/all.js"></script>
+<!--- End of Script Source Files -->
+
+</body>
+</html>
+
+
+
+
+<!--- Check out my courses! 
+<div class="udemy-course" style="position: fixed; bottom: 0; right: 0; margin-bottom: -5px; z-index: 100;">
+	<a href="https://w3newbie.com/courses" target="_blank" style="z-index: 999!important; cursor: pointer!important;"><img src="https://www.w3newbie.com/wp-content/uploads/nuno-course-banner.png" style="max-width: 100%; min-width: 100%;"></a>
+</div>
+-->

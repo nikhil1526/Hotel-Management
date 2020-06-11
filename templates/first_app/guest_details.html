@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+<head>
+<title>
+	Guest Details
+</title>
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+   <link rel="stylesheet" type="text/css" href="{% static 'first_app\fontawesome-free-5.11.2-web\css\all.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'first_app\bootstrap\css\bootstrap.css' %}" >
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <style>
+ table{
+  margin-top: 20px;
+ }
+ input{
+  margin:5px;
+ }
+ 
+ 
+  </style>
+
+  
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark" >
+  <a class="navbar-brand" href="#"><img style="height: 30px" src="{% static 'first_app/images/nuno.png' %}"></a>
+ 
+        <a class="nav-link" href="{% url 'reception' %}" style=" text-align: right;"><span style="color: white;">Home </span><span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="{% url 'logout' %}" style=" text-align: right;"><span style="color: white;">Logout <span class="sr-only">(current)</span></a>
+      
+  </nav>
+ 
+  <div class="container">
+     <h3 style="margin-top: 20px;">Account Details</h3>
+  <table class="table table-bordered">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Booking Id</th>
+      <th scope="col">Room Id</th>
+      <th scope="col">Room Charges</th>
+      <th scope="col">Restaurant Charges</th>
+      <th scope="col">Tariff</th>
+      <th scope="col">Total</th>
+   
+
+      
+
+    </tr>
+  </thead>
+  <tbody>
+    
+    {% for d,t in accounts %}
+    <tr>
+      <th scope="row">{{forloop.counter}}</th>
+      <td>{{d.Booking_Id}}</td>
+      <td>{{d.Room_Id}}</td>
+      <td>{{d.Room_charges}}</td>
+      <td>{{d.Restaurant_charges}}</td>
+      <td>{{d.Tariff_charges}}</td>
+
+      <td>{{t}}</td>
+   
+
+    
+       
+    </tr>
+    {% endfor %}
+      </tbody>
+  
+</table>
+<div class="row">
+  <div class="col-lg-4"><h4>Pending:{{pending}}</h4></div>
+  <div class="col-lg-4"><h4>Advance:{{advance}}</h4></div>
+  <div class="col-lg-4"><h4>Total:{{overall}}</h4></div>
+</div>
+
+   
+    <h3 style="margin-top: 40px;">Personal Details</h3>
+  
+   <!--   <form method='GET'>
+    {{filter_current.form}}
+    <button type="submit" name='current' class="btn btn-primary">Search</button>
+  </form> -->
+  {% if details %}
+  <table class="table table-bordered">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Booking Id</th>
+      <th scope="col">Room Id</th>
+      <th scope="col">Name</th>
+      <th scope="col">Phone Number</th>
+      <th scope="col">Email</th>
+      <th scope="col">Identity</th>
+   
+
+      
+
+    </tr>
+  </thead>
+  <tbody>
+    
+    {% for d in details %}
+    <tr>
+      <th scope="row">{{forloop.counter}}</th>
+      <td>{{d.Booking_Id}}</td>
+      <td>{{d.Room_Id}}</td>
+      <td>{{d.Name}}</td>
+      <td>{{d.PhoneNumber}}</td>
+      <td>{{d.Email}}</td>
+
+      <td><img style="height: 220px; width: 350px" src="{{ d.identity.url }}"></td>
+   
+
+    
+       
+    </tr>
+    {% endfor %}
+      </tbody>
+  
+</table>
+  {% else %}
+   <form id="my_form" class="m_form" enctype="multipart/form-data" method="POST">
+        {% csrf_token %}
+  <table class="table table-bordered">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Booking Id</th>
+      <th scope="col">Room Id</th>
+      <th scope="col">Name</th>
+      <th scope="col">Phone Number</th>
+      <th scope="col">Email</th>
+      <th scope="col">Identity</th>
+    
+
+      
+
+    </tr>
+  </thead>
+ 
+  <tbody>
+    
+    
+    {% for d in rooms.all %}
+    <tr>
+      <th scope="row">{{forloop.counter}}</th>
+      
+
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+
+      <td></td>
+      
+        
+
+    
+       
+    </tr>
+    {% endfor %}
+      </tbody>
+
+  
+</table>
+<button type="submit" class="btn btn-primary">Save</button>
+        </form>
+
+
+    </div>
+<script>
+var elements=document.getElementsByTagName('tbody')[1].getElementsByTagName('tr')
+
+var index=0
+{% for d in rooms.all %}
+
+var element=elements[index].getElementsByTagName('td')
+new_element=`
+<input style="width:90px" type='number' form='my_form' name='Booking_Id' value='{{pk}}' required>`
+element[0].innerHTML=new_element
+new_element=`
+<input style="width:90px" type='number' form='my_form' name='Room_Id' value='{{d.Room_Id}}' required>`
+element[1].innerHTML=new_element
+new_element=`
+<input style="width:90px" type='text' form='my_form' name='Name' max_length=30 required>`
+element[2].innerHTML=new_element
+new_element=`
+<input style="width:90px" type='text' form='my_form' name='PhoneNumber' max_length=12  required>`
+element[3].innerHTML=new_element
+new_element=`
+<input  type='text' form='my_form' name='Email' max_length=30 required>`
+element[4].innerHTML=new_element
+new_element=`
+<input type='file' form='my_form' accept='image/*' name='identity' value='{{pk}}'>`
+element[5].innerHTML=new_element
+
+index=index+1
+{% endfor %}
+</script>
+{% endif %}
+
+</body>
+</html>
+   

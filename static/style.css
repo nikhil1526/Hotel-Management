@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css?family=Lato:400,700&display=swap');
+/*font-family: 'Lato', sans-serif;*/
+body
+{
+	overflow-x: hidden;
+	font-family: font-family: 'Lato', sans-serif;
+	color: #505962
+}
+/*----------nav*/
+.navbar
+{
+	text-transform:uppercase;
+	font-weight: 700;
+	font-size: .9rem; 
+	letter-spacing: .1rem;
+	background: rgba(0,0,0,0.6)!important;
+}
+.navbar-brand
+{
+	height: 2rem;
+}

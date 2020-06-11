@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+<head>
+<title>
+	Housekeeping
+</title>
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+   <link rel="stylesheet" type="text/css" href="{% static 'first_app\fontawesome-free-5.11.2-web\css\all.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'first_app\bootstrap\css\bootstrap.css' %}" >
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <style>
+
+img{
+  height: 30px;
+ }
+
+ .card{
+  margin-bottom: 20px;
+  border: none;
+ }
+  </style>
+
+  
+</head>
+<body style="background-color: #ebeff5">
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark" >
+  <a class="navbar-brand" href="#"><img src="{% static 'first_app/images/nuno.png' %}"></a>
+         <a class="nav-link" href="{% url 'logout' %}" style=" text-align: right;"><span style="color: white;">Logout <span class="sr-only">(current)</span></a>
+  </nav>
+
+<div class="container">
+  <form method='GET'>
+    {{filter.form}}
+    <button type="submit" name='search' class="btn btn-primary">Search</button>
+  </form>
+  <div class="col-md">
+    {% if requests %}
+    <h3><b>All Housekeeping Requests</b></h3>
+      
+    
+    {% for i in requests %}
+    <div style="margin-top: 40px;" class="row">
+        <div class="col-lg-6" style="text-align: center;">Booking_Id:{{i.Booking_Id}}</div>
+        <div class="col-lg-6" style="text-align: center;">Room_Id:{{i.Room_Id}}</div>
+      </div>
+    <div class="card card-body">
+
+    <div><textarea name="Request" style="width: 100%" cols="40" rows="10" readonly>{{i.Request}}</textarea></div>
+    <a href="{% url 'change_housekeeping' i.id %}" class="btn btn-primary btn-sm " style="color: white;width: 25%; margin-top: 20px">{{i.Status}}</a>
+    </div>
+    {% endfor %}
+    {% else %}
+    <h3>No requests yet!</h3>
+
+
+    {% endif %}
+
+  </div>
+</div>

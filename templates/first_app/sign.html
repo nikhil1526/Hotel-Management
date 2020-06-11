@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+<head>
+<title>
+	Signup
+</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+   <link rel="stylesheet" type="text/css" href="{% static 'first_app\fontawesome-free-5.11.2-web\css\all.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'first_app\bootstrap\css\bootstrap.css' %}" >
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<link rel="stylesheet" type="text/css" href="{% static 'sign.css' %}">
+<style>
+  img{
+    height: 30px;
+  }
+</style>
+</head>
+<body style="background-image: url({% static 'first_app/images/2.jpg' %}) " >
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" >
+  <a class="navbar-brand" href="#"><img src="{% static 'first_app/images/nuno.png' %}"></a>
+ 
+        <a class="nav-link" href="{% url 'abc' %}" style=" text-align: right;"><span style="color: white;">Home <span class="sr-only">(current)</span></a>
+       
+  </nav>
+
+  <form method='POST'>
+{% csrf_token %}
+ <div class='container'>
+   
+  
+    {% if messages %}
+      <ul class='messages'>
+        {% for message in messages %}
+          <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>{{message}}</strong> 
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        {% endfor %}
+    {% endif %}  
+    </ul> 
+  </div>
+    <div class='container d-flex justify-content-center'>
+      <div class='card'>
+        <div style="color: white" class='card-header'>
+          <h2>SIGN UP</h2>
+        </div>
+        <div class='card-body'>
+            <div class='input-group form-group'>
+              <div class='input-group-prepend'>
+                <span style="margin-right: 10px" class='input-group-text'>
+                  <i class="fas fa-user"></i>
+                </span>
+              </div>
+              <span style="color: white">{{form.username.label}} </span>
+              <span style="margin-left: 30px">{{form.username}} </span>
+            </div>
+            <div class='input-group form-group'>
+              <div class='input-group-prepend'>
+                <span style="margin-right: 10px" class='input-group-text'>
+                  <i class="fas fa-user"></i>
+                </span>
+              </div>
+              <span style="color: white">{{form.email.label}}</span>
+              <span style="margin-left: 5px"> {{form.email}} </span>
+            </div>
+            <div class='input-group form-group'>
+              <div class='input-group-prepend'>
+                <span style="margin-right: 10px"  class='input-group-text'>
+                  <i class="fas fa-unlock-alt"></i>
+                </span>
+              </div>
+             <span style="color: white"> {{form.password1.label}}</span>
+              <span style="margin-left: 35px" >{{form.password1}}</span>
+            </div>
+            <div class='input-group form-group'>
+              <div class='input-group-prepend'>
+                <span style="margin-right: 10px" class='input-group-text'>
+                  <i class="fas fa-unlock-alt"></i>
+                </span>
+              </div>
+              <span style="color: white">Re-password</span>
+              <span style="margin-left: 10px">{{form.password2}}</span>
+            </div>
+            <span style="color: white">{{form.errors}}</span>
+        
+            <div class='form-group'>
+              <input type='submit' value='Signup' class='btn btn-primary'>
+            </div>
+            <div style="color: white"> <p style="margin-left: 95px">Already have an account?</p></div>
+            <div style="color: white" > <p style="margin-left: 150px"><a style="color: white" href="{% url 'login' %}"><u>Login</u></a></p></div>
+          
+        </div>
+      </div>
+    
+  </div>  
+
+
+</form>	
+<script >
+  var form_fields = document.getElementsByTagName('input')
+  form_fields[1].placeholder='Enter Username';
+  form_fields[2].placeholder='Enter Email';
+  form_fields[3].placeholder='Enter Password';
+  form_fields[4].placeholder='Re-Enter Password';
+
+</script>
+
+</body>	
+</html>

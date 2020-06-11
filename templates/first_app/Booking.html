@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+<head>
+<title>
+	Booking
+</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+   <link rel="stylesheet" type="text/css" href="{% static 'first_app\fontawesome-free-5.11.2-web\css\all.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'first_app\bootstrap\css\bootstrap.css' %}" >
+
+
+<link rel="stylesheet" type="text/css" href="{% static 'bo.css' %}">
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <style>
+    hr.new4 {
+  border: solid black;
+}
+img{
+  height: 30px;
+ }
+  </style>
+</head>
+
+
+<body >
+<!-- <div class="container"> -->
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark" >
+  <a class="navbar-brand" href="#"><img src="{% static 'first_app/images/nuno.png' %}"></a>
+ 
+        <a class="nav-link" href="{% url 'home' %}" style=" text-align: right;"><span style="color: white;">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="{% url 'logout' %}" style=" text-align: right;"><span style="color: white;">Logout <span class="sr-only">(current)</span></a>
+      
+  </nav>
+
+<div class="split left">
+
+  <div class="row">
+    <div class="col">
+      <div class="col-md">
+        <div class="card text-center mb-3" style="height: 200px; margin: 60px; width:65%; background-color: #7CD1C0">
+          <div class="card-header" style="border-bottom: solid black">
+            <h3 class="card-title" style="color: black">Economy</h3>
+          </div>
+          <div class="card-body">
+            <h1 class="card-title" style="color: black">{{count_e}}</h1>
+          </div>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+      <div class="col-md">
+        <div class="card text-white text-center mb-3" style="height: 200px; margin: 60px; width: 65%; background-color: #ebeff5">
+          <div class="card-header" style="border-bottom: solid black">
+            <h3 class="card-title" style="color: black">Deluxe</h3>
+          </div>
+          <div class="card-body">
+            <h1 class="card-title" style="color: black">{{count_d}}</h1>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+    <div class="col">
+      <div class="col-md">
+        <div class="card text-white text-center mb-3" style="height: 200px; margin: 60px; width:65%; background-color: #ebeff5">
+          <div class="card-header" style="border-bottom: solid black">
+            <h3 class="card-title" style="color: black">Super Deluxe</h3>
+          </div>
+          <div class="card-body">
+            <h1 class="card-title" style="color: black">{{count_s}}</h1>
+          </div>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+      <div class="col-md">
+        <div class="card text-white text-center mb-3" style="height: 200px; margin: 60px; width: 65%;
+        background-color: #7CD1C0">
+          <div class="card-header" style="border-bottom: solid black">
+            <h3 class="card-title" style="color: black">Suite</h3>
+          </div>
+          <div class="card-body">
+            <h1 class="card-title" style="color: black">{{count_su}}</h1>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+</div>
+
+<div class="split right">
+   {% if messages %}
+      <ul class='messages'>
+        {% for message in messages %}
+          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>{{message}}</strong> 
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        {% endfor %}
+    {% endif %}  
+    </ul> 
+		 <form method="POST" action="{% url 'book_rooms' %}">
+        {% csrf_token %}
+    <div class="row" style="margin-left: 15px; margin-right: 15px;">
+		<div class="card card-body" style="background-color: black;">
+			
+				 <div class="form-row">
+    				<div class="col">
+    					<label for="number" style="color: white">Number of Rooms</label>
+      					<input type="number" name="number" min="1" class="form-control" id="number" placeholder="No. of rooms" required>
+    				</div>
+    				<div class="col">
+    					<div><label for="type" style="color: white">Type of Rooms</label></div>
+      					<select name="type" id="type" class="form-control" required>
+      						<option value="Economy">Economy</option>
+      						<option value="Deluxe">Deluxe</option>
+      						<option value="SuperDeluxe">SuperDeluxe</option>
+      						<option value="Suite">Suite</option>
+      					</select>
+    				</div>
+    			</div>
+
+    		
+    	</div>
+    </div>
+   
+    <div class="row" style="margin-left: 15px; margin-right: 15px; margin-top: 20px;">
+    <div class="card card-body" style="background-color: black;">
+      
+         <div class="form-row">
+          <div class="col">
+              <label for="checkin" style="color: white">Check-In Date</label>
+               <ul class="list-group list-group-flush">
+                <input type="text" name="checki" class="form-control datepicker" placeholder="Check-In" id="checkin" required>
+              </ul>
+            </div>
+            <div class="col">
+
+              <label for="checkout" style="color: white">Check-Out Date</label>
+              <ul class="list-group list-group-flush">
+                <input type="text" name="checko" class="form-control datepicker" placeholder="Check-Out" id="checkout" required>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+     
+    
+    <div style="text-align: center; margin-top: 10px">
+  <button style="width: 25%" name="book" type="submit" class="btn btn-primary btn-md">Book Rooms</button>
+</div>
+
+
+
+    </form>
+  <!--   <hr class="new4" > -->
+    <form method="POST" action="{% url 'checking' %}">
+      {% csrf_token %}
+    <div class="row" style="margin-left: 15px; margin-right: 15px; margin-top: 60px;">
+    <div class="card card-body" style="background-color: black;">
+      
+         <div class="form-row">
+          <div class="col">
+              <label for="checki" style="color: white">Check-In Date</label>
+               <ul class="list-group list-group-flush">
+                <input type="text" name="checkin" class="form-control datepicker" placeholder="Check-In" id="checki" required>
+              </ul>
+            </div>
+            <div class="col">
+
+              <label for="checko" style="color: white">Check-Out Date</label>
+              <ul class="list-group list-group-flush">
+                <input type="text" name="checkout" class="form-control datepicker" placeholder="Check-Out" id="checko" required>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+       <div style="text-align: center; margin-top: 10px">
+  <button name="check" style="width: 25%" type="submit" class="btn btn-primary btn-md">Check Availablity</button>
+</div>
+
+     
+    </form>
+	
+</div>
+    
+
+  			
+
+<!-- </div>	 -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<script>
+  $( function() {
+    $( ".datepicker" ).datepicker();
+  } );
+  </script>	
+
+</body>
+</html>
